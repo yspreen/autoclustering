@@ -1,0 +1,113 @@
+
+<!DOCTYPE html>
+  <head>
+    <!-- Global site tag-->
+    <meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>mifaser Analysis UI</title>
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <!-- jQuery--><script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <script crossorigin="" src="https://unpkg.com/react@16.8.6/umd/react.development.js"></script>
+    <script crossorigin="" src="https://unpkg.com/react-dom@16.8.6/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.26.0/babel.js"></script>
+    <link rel="stylesheet" href="https://necolas.github.io/normalize.css/7.0.0/normalize.css" type="text/css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+    <style>
+      #customers {
+        font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+      }
+      
+      #customers td, #customers th {
+        border: 1px solid #ddd;
+        padding: 8px;
+      }
+      
+      #customers tr:nth-child(even){background-color: #f2f2f2;}
+      
+      #customers tr:hover {background-color: #ddd;}
+      
+      #customers th {
+        padding-top: 12px;
+        padding-bottom: 12px;
+        text-align: left;
+        background-color: #4CAF50;
+        color: white;
+      }
+      </style>
+  </head>
+  <body>
+    <div id='root'></div>
+    <script type='text/babel'>
+      const React = React;
+      const ReactDOM = ReactDOM;
+
+
+      class View extends React.Component {
+
+          constructor(props) {
+              super(props);
+              this.state = {
+                data: {} //will be set from data hook
+              }
+              this.setState = this.setState.bind(this)
+              this.update = new Data(this)
+            }
+
+            componentDidUpdate() { /*can update here*/ }
+            componentDidMount() { /*can update here*/ }
+          
+            Rows(p) {
+              return p.data.map(r => { 
+                <tr>
+                  <td>r.filename</td>
+                  <td>r.label</td>
+                  <td>r.batchid</td>
+                  <td>r.database</td>
+                  <td>r.email</td>
+                </tr>
+                }
+              )
+            }
+
+            render() { 
+              return (
+                <table>
+                  <this.Rows data={this.state.data} />
+                </table>
+              )
+            }   
+      }
+      ReactDOM.render(<View />, document.getElementById('root'))
+      
+      //responsible for populating and handling updates to data
+      class Data {
+        constructor(context) {
+          this.context = context
+        }
+
+        schema = {
+          filename: '',
+          label: '',
+          batchid: '',
+          database: '',
+          email: ''
+        }
+
+        data = {} //puplated from the database
+        this.context.data = data //setting the state of the table will update the component in react
+
+        updateTable(row, data) {
+          if (data==null) {
+            data.splice(row)
+            context.data = data
+          }
+        }
+      }
+      
+
+    </script>
+  </body>
+</html>
