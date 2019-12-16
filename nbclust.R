@@ -59,8 +59,8 @@ for (m in methods) {
         close(zzf)
         #return()
       },
-      warning = function(e) { cat(toString(paste("WARN: ",m,d,i))); },
-      error = function(e) { cat(toString(paste("ERR: ",m,d,i))); })
+      warning = function(e) { cat(toString(paste("WARN: ",m,d,i))); cat(e); },
+      error = function(e) { cat(toString(paste("ERR: ",m,d,i))); cat(e); })
     }
     cat("*>\n")
   }
