@@ -1,10 +1,10 @@
-install.packages("NbClust")
+install.packages("NbClust", repos='http://cran.r-project.org')
 
 cat("---- started ----\n") # all cat gets printed to the web ui
 library(NbClust)
 #library(parallel)
 warnings()
-cores <- detectCores()
+cores <- 1
 cat("Nodes available: ", cores,"\n")
 cat("spawning cluster...\n")
 #cl4_1 <- makeCluster(cores, outfile="") # number of nodes to use in pool
