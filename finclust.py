@@ -6,10 +6,11 @@ import numpy as np
 from IPython.core.interactiveshell import InteractiveShell
 InteractiveShell.ast_node_interactivity = "all"
 
-# required for cleaning input before passing to NbClust
-
 
 def preprocess(input_file):
+    """
+    required for cleaning input before passing to NbClust
+    """
     df = pd.read_csv(input_file).T
     df.to_csv('sand_input')
     df.columns = df.iloc[0]
@@ -22,10 +23,11 @@ def preprocess(input_file):
     #
     meta.head()
 
-# build list of files successfully output from NbClust
-
 
 def retrieve_clusterings_files(input_file_name):
+    """
+    build list of files successfully output from NbClust
+    """
     file = 'CAMDA'  # the input file name
     path = 'partitions/' + file + '/'
     # get all file names in the 'path' directory where clustering output is stored
@@ -35,18 +37,21 @@ def retrieve_clusterings_files(input_file_name):
         for file in f:
             files.append(os.path.join(r, file))
 
-# mutual info score calculation
-
 
 def mi_score(res):
+    """
+    mutual info score calculation
+    """
     res = res.sort_values('ID')
     score = skm.adjusted_mutual_info_score(meta['Group'], res['Group'])
     a = {'score': score, 'nc': len(res.groupby('Group'))}
     return a
 
 
-# accuracy calculation
 def accuracy(res):
+    """
+    accuracy calculation
+    """
     acc = pd.DataFrame(
         columns=['m_id', 'r_id', 'max', 'acc_correct', 'acc_total'])
     gres = res.groupby('Group')
@@ -66,10 +71,11 @@ def accuracy(res):
         acc['acc'], weights=acc['max']), 'avg': np.average(acc['acc']), 'nc': int(np.max(acc['r_id']))}
     return r
 
-# coverage calculation
-
 
 def coverage(res):
+    """
+    coverage calculation
+    """
     cov = pd.DataFrame(columns=['m_id', 'r_id', 'max', 'cov'])
     gres = res.groupby('Group')
     for i in gmeta.groups:
@@ -88,11 +94,13 @@ def coverage(res):
     return r
 
 
-# analyser
-# built for mutual info score output
-# to adjust, see output dictionary for object parameters
-# and call the appropriate method to generate the object
 def analyze(input_file_name, files):
+    """
+    analyser
+    built for mutual info score output
+    to adjust, see output dictionary for object parameters
+    and call the appropriate method to generate the object
+    """
     # '  '_meta is meta file corresponding to input to clustering
     meta = pd.read_table(input_file_name + '_meta')[['ID', 'Group']]
 
