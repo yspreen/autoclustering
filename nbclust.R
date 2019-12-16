@@ -38,17 +38,16 @@ cat("analyzing...\n")
 for (m in methods) {
   cat(paste(m,"\n"))
   for (d in distances) {
-    cat(" ",d,"\n","\t")
+    cat(">",d,"\n")
     if (m == 'ward.D' && d == 'binary' || m == 'ward.D' && d == 'canberra') {
       next ## this combo kills the cluster for whatever reason
     }
     #clusterExport(cl4_1, c("m", "d", "mtb", "path", "file"), envir = environment())
     #comp <- clusterApply(cl4_1, indexes, function(i) {
     for (i in indexes) {
-      cat(i)
+      cat('>>', i, '\n')
       warnings()
       tryCatch({
-        cat(".\n\t")
         library(NbClust)  # not for testing
         res <- NbClust(data=mtb, diss=NULL, method=m, distance=d, index=i, min.nc=2, max.nc=12 )
         #cat(res$Best.partition)
@@ -59,12 +58,12 @@ for (m in methods) {
         close(zzf)
         #return()
       },
-      warning = function(e) { cat(toString(paste("WARN: ",m,d,i))); cat(e); },
-      error = function(e) { cat(toString(paste("ERR: ",m,d,i))); cat(e); })
+      warning = function(e) { cat(toString(paste("WARN: ",m,d,i,format(e),'', sep="\n"))); },
+      error = function(e) { cat(toString(paste("ERR: ",m,d,i,format(e),'', sep="\n"))); })
     }
     cat("*>\n")
   }
 }
 
-cat("killing the cluster... \n")
+#cat("killing the cluster... \n")
 #stopCluster(cl4_1)
