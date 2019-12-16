@@ -24,7 +24,7 @@ dir.create(paste(path, "partitions/", file, '/', sep=""))
 #clear anything that's already there
 system(paste("rm ", path, "partitions/", file, "/*", sep=""))
 
-mtb <- t(read.table(paste(path, file, '', sep=""), header=TRUE, row.names=1, sep="\t"))       # this reads the input file referenced above
+mtb <- t(read.table(paste(path, file, '', sep=""), header=TRUE, row.names=1, sep=";"))       # this reads the input file referenced above
 #print(mtb)
 
 methods <- c("kmeans","ward.D")
