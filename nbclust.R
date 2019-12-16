@@ -67,4 +67,4 @@ for (m in methods) {
 }
 
 cat("killing the cluster... \n")
-stopCluster(cl4_1)
+#stopCluster(cl4_1)
