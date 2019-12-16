@@ -8,7 +8,7 @@ cores <- 1
 cat("Nodes available: ", cores,"\n")
 cat("spawning cluster...\n")
 #cl4_1 <- makeCluster(cores, outfile="") # number of nodes to use in pool
-args = commandArga(trailingOnly=TRUE)
+args = commandArgs(trailingOnly=TRUE)
 if(length(args)==0) {
   stop("Input file must be supplied")
 }
