@@ -14,5 +14,4 @@ RUN mkdir /app \
 WORKDIR /app
 ADD nbclust.R /app
 
-ENTRYPOINT [ "Rscript" ]
-CMD [ "/app/nbclust.R" ]
+ENTRYPOINT [ "Rscript", "/app/nbclust.R" ]
