@@ -4,7 +4,7 @@ LABEL input_1="nbclust_method,,,content" \
     input_2="nbclust_distance,,,content" \
     input_3="nbclust_index,,,content" \
     input_4="*,,static" \
-    output="*,,"
+    output="*,--,"
 
 RUN mkdir /app \
     && cd /app \

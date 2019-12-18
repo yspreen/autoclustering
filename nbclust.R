@@ -5,7 +5,7 @@ library(NbClust)
 warnings()
 args = commandArgs(trailingOnly=TRUE)
 if(length(args) < 4) {
-  stop("Usage: <method> <distance> <index> <filename> <output_dir>")
+  stop("Usage: <method> <distance> <index> <filename> [--] <output_dir>")
 }
 
 #path = 'C:\\Users\\Nicholas\\Downloads\\' # <-- this is only for testing purposes
@@ -16,6 +16,9 @@ m = args[1]
 d = args[2]
 i = args[3]
 path = paste(args[5], "/", sep="")
+if (length(args) == 6) {
+  path = paste(args[6], "/", sep="")
+}
 
 # ************************
 
