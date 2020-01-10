@@ -25,6 +25,8 @@ if (length(args) == 6) {
 mtb <- t(read.table(file, header=TRUE, row.names=1, sep="\t"))       # this reads the input file referenced above
 #print(mtb)
 
+maxnc <- min(nrow(mtb) / 3, 20)
+
 cat("analyzing...\n")
 
   cat(paste(m,"\n"))
@@ -33,7 +35,7 @@ cat("analyzing...\n")
       cat('>>', i, '\n')
       warnings()
       tryCatch({
-        res <- NbClust(data=mtb, diss=NULL, method=m, distance=d, index=i, min.nc=2, max.nc=12 )
+        res <- NbClust(data=mtb, diss=NULL, method=m, distance=d, index=i, min.nc=2, max.nc=maxnc)
         
         zf = paste(path, paste(m,d,i, sep='_'), '.tsv', sep="")
         zzf = file(zf, open = 'w+')
