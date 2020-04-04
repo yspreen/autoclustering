@@ -1,4 +1,5 @@
 import sys
+import os
 from sklearn.metrics.cluster import adjusted_mutual_info_score
 
 
@@ -15,7 +16,7 @@ def main():
     except:
         true_label = "-\n-"
 
-    COL = 5  # city
+    COL = int(os.environ.get('CITYCOL', '5'))  # city
     true_label = true_label.split("\n")[1:]  # ignore header
     true_label = [l.split("\t") for l in true_label]
     true_label = list(filter(lambda l: len(l) >= COL, true_label))
