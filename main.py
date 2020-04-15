@@ -1,6 +1,7 @@
 import sys
 import os
 from sklearn.metrics.cluster import adjusted_mutual_info_score
+from itertools import compress
 
 
 def main():
@@ -33,6 +34,12 @@ def main():
     pred_label = [l.split(" ") for l in pred_label]
     pred_label = list(filter(lambda l: len(l) >= COL, pred_label))
     pred_label = [l[COL - 1] for l in pred_label]
+
+    mask = [
+        label != "REMOVE" for label in true_label
+    ]
+    true_label = list(compress(true_label, mask))
+    pred_label = list(compress(pred_label, mask))
 
     try:
         score = adjusted_mutual_info_score(true_label, pred_label)

@@ -17,3 +17,4 @@ LABEL input_1="*|pred" \
     input_2="*|true,,static" \
     output="float_score,-o," \
     cpu="300m"
+ENV CITYCOL=5
